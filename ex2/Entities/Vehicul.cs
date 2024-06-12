@@ -1,11 +1,14 @@
 ﻿namespace ex2.Entities {
     public abstract class Vehicul {
-        public int Id { get; set; }
-        public string NumarInmatriculare { get; set; }
+        private int _id;
+        private string _name;
 
-        protected Vehicul(int id, string numarInmatriculare) {
-            Id = id;
-            NumarInmatriculare = numarInmatriculare;
+        public int Id { get => _id; set => _id = value; }
+        public string Name { get => _name; set => _name = value; }
+
+        protected Vehicul(int id, string name) {
+            _id = id;
+            _name = name;
         }
     }
 }

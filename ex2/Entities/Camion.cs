@@ -1,23 +1,28 @@
 ﻿using System;
 
 namespace ex2.Entities {
-    public class Camion : Vehicul, IComparable<Camion>, ICloneable {
-        public string Marca { get; set; }
-        public string Model { get; set; }
+    public class Camion : Vehicul, ICloneable, IComparable<Camion> {
+        private int _tonaj;
+        /*      private int[] _pontaj;*/
+        public int Tonaj { get => _tonaj; set => _tonaj = value; }
 
-        public Camion(int id, string numarInmatriculare, string marca, string model) : base(id, numarInmatriculare) {
-            Marca = marca;
-            Model = model;
-        }
-
-        public int CompareTo(Camion other) {
-            if (Model.Length < other.Model.Length) return -1;
-            if (Model.Length > other.Model.Length) return 1;
-            return 0;
+        public Camion(int id, string nume, int tonaj) : base(id, nume) {
+            Tonaj = tonaj;
         }
 
         public object Clone() {
-            return new Camion(Id, NumarInmatriculare, Marca, Model);
+            return new Camion(Id, Name, Tonaj);
         }
+
+        public int CompareTo(Camion other) {
+            return Tonaj.CompareTo(other.Tonaj);
+        }
+        public override string ToString() {
+            return $"ID: {Id}, Name: {Name}, Tonaj:{Tonaj}";
+        }
+        public static int operator +(Camion a, Camion b) {
+            return a.Tonaj + b.Tonaj;
+        }
+
     }
 }
