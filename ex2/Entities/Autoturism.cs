@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace ex2.Entities {
+﻿namespace ex2.Entities {
     public class Autoturism : Vehicul {
         private string culoare;
         private double[] greutatePeRoata;
