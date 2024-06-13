@@ -42,6 +42,7 @@
             this.saveDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editeazaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.treeView1 = new System.Windows.Forms.TreeView();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -190,11 +191,19 @@
             this.editeazaToolStripMenuItem.Text = "Editeaza";
             this.editeazaToolStripMenuItem.Click += new System.EventHandler(this.editeazaToolStripMenuItem_Click);
             // 
+            // treeView1
+            // 
+            this.treeView1.Location = new System.Drawing.Point(515, 408);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(380, 132);
+            this.treeView1.TabIndex = 6;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1208, 694);
+            this.Controls.Add(this.treeView1);
             this.Controls.Add(this.lvExtraseCont);
             this.Controls.Add(this.tbExtrasDetalii);
             this.Controls.Add(this.lvTranzactii);
@@ -231,6 +240,7 @@
         private System.Windows.Forms.ToolStripMenuItem saveDBToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem editeazaToolStripMenuItem;
+        private System.Windows.Forms.TreeView treeView1;
     }
 }
 
