@@ -159,6 +159,7 @@
             this.salvareXMLToolStripMenuItem.Name = "salvareXMLToolStripMenuItem";
             this.salvareXMLToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.salvareXMLToolStripMenuItem.Text = "Salvare XML";
+            this.salvareXMLToolStripMenuItem.Click += new System.EventHandler(this.salvareXMLToolStripMenuItem_Click);
             // 
             // salvareTXTToolStripMenuItem
             // 
@@ -180,7 +181,7 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editeazaToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(241, 69);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(150, 36);
             // 
             // editeazaToolStripMenuItem
             // 

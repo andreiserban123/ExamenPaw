@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.IO;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace ex3 {
     public partial class Form1 : Form {
@@ -151,6 +152,24 @@ namespace ex3 {
             }
             else {
                 MessageBox.Show("Selecteaza un singur extras!");
+            }
+        }
+
+        private void salvareXMLToolStripMenuItem_Click(object sender, EventArgs e) {
+            SaveFileDialog fd = new SaveFileDialog();
+            fd.Filter = "fisier XML: extrase cont | *.xml";
+            fd.CheckPathExists = true;
+
+            if (fd.ShowDialog() == DialogResult.OK) {
+                List<ExtrasCont> list = new List<ExtrasCont>();
+                foreach (ListViewItem lv in lvExtraseCont.Items) {
+                    list.Add(lv.Tag as ExtrasCont);
+                }
+                XmlSerializer serializer = new XmlSerializer(typeof(List<ExtrasCont>));
+                Stream fisier = File.Create(fd.FileName);
+                serializer.Serialize(fisier, list);
+                fisier.Close();
+                MessageBox.Show("Fisier xml scris");
             }
         }
     }

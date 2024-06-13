@@ -6,6 +6,9 @@
         public double suma;
         public string dataTranzactie;
 
+        public Tranzactie() {
+        }
+
         public Tranzactie(int idTranzactie, string contIban, string detaliiTranzactie, double suma, string dataTranzactie) {
             this.idTranzactie = idTranzactie;
             this.contIban = contIban;

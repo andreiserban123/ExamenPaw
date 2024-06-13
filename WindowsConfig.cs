@@ -53,8 +53,68 @@ namespace exam
                 }
             }
         }
+        // xml salvare
+        private void salvareaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog fd = new SaveFileDialog();
+            fd.Filter = "fisiere XM: extrase cont | *.xml";
+            fd.CheckPathExists = true;
 
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                List<ExtrasCont> listaLV = new List<ExtrasCont>();
+                foreach (ListViewItem item in lvExtraseCont.Items)
+                {
+                    listaLV.Add(item.Tag as ExtrasCont);
+                }
 
+                XmlSerializer serializer = new XmlSerializer(typeof(List<ExtrasCont>));
+                Stream fisier = File.Create(fd.FileName);
+                serializer.Serialize(fisier, listaLV);
+                fisier.Close();
+            }
+        }
+
+        // xml restaureare
+        private void restaurareToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Filter = "fisere XML estras cont | *.xml";
+            fd.CheckFileExists = true;
+
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                List<ExtrasCont> listaFisier = new List<ExtrasCont>();
+                XmlSerializer serializer = new XmlSerializer(typeof(List<ExtrasCont>));
+                Stream fiser = File.OpenRead(fd.FileName);
+                listaFisier = (List<ExtrasCont>)serializer.Deserialize(fiser);
+
+                if (lvExtraseCont.Items.Count > 0)
+                {
+                    if (MessageBox.Show("Vrei sa stergi extrasele existente?",
+                        "Warning", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    {
+                        lvExtraseCont.Items.Clear();
+                    }
+                }
+
+                foreach (ExtrasCont extras in listaFisier)
+                {
+                    String tranzactii = "";
+                    foreach (Tranzactie tranzactie in extras.tranzactii)
+                    {
+                        tranzactii += " " + tranzactie.idTranzactie;
+                    }
+
+                    ListViewItem lvi = new ListViewItem(new string[]
+                    {
+                        extras.numeClient, extras.adresa, tranzactii
+                    });
+                    lvi.Tag = extras;
+                    lvExtraseCont.Items.Add(lvi);
+                }
+            }
+        }
 
 
     }

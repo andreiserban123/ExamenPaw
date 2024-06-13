@@ -1,11 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ex3 {
+    [Serializable]
     public class ExtrasCont {
         public string numeClient;
         public string adresa;
         public List<Tranzactie> tranzactii;
+
+        public ExtrasCont() {
+        }
 
         public ExtrasCont(string numeClient, string adresa, List<Tranzactie> tranzactii) {
             this.NumeClient = numeClient;
