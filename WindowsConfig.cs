@@ -89,45 +89,32 @@ namespace exam
             }
         }
         // Citire txt
-        private void btnIncarcaDinFisier_Click(object sender, EventArgs e)
+
+        string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "date.txt"); // necesar decat daca citesti din root
+        private void CitireTxt()
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog
-            {
-                Filter = "Fișiere text|*.txt",
-                Title = "Selectează fișierul cu angajați"
-            };
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Filter = "|*.txt";
+            fd.CheckFileExists = true;
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            if (fd.ShowDialog() == DialogResult.OK)
             {
-                string filePath = openFileDialog.FileName;
-                angajati = CitesteAngajatiDinFisier(filePath);
-                ActualizeazaListView();
-            }
-        }
-
-        private List<Angajat> CitesteAngajatiDinFisier(string filePath)
-        {
-            List<Angajat> angajati = new List<Angajat>();
-
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                string line;
-                while ((line = reader.ReadLine()) != null)
+                using (StreamReader sr = new StreamReader(fd.FileName))
                 {
-                    string[] parts = line.Split(',');
-                    if (parts.Length == 3)
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
                     {
-                        string nume = parts[0];
-                        DateTime dataNasterii = DateTime.Parse(parts[1]);
-                        int idCompanie = int.Parse(parts[2]);
-
-                        Angajat angajat = new Angajat(nume, dataNasterii, idCompanie);
-                        angajati.Add(angajat);
+                        string[] values = line.Split(',');
+                        Credit c = new Credit();
+                        c.Client = values[0];
+                        c.ValoareCredit = double.Parse(values[1]);
+                        c.Dobanda = double.Parse(values[2]);
+                        c.DataAcordarii = DateTime.Parse(values[3]);
+                        c.Perioada = int.Parse(values[4]);
+                        credite.Add(c);
                     }
                 }
             }
-
-            return angajati;
         }
 
         // xml salvare
@@ -353,7 +340,6 @@ namespace exam
                 series.Points.AddXY(companie.Name, nr);
             }
         }
-
         //Pentru printat document
         // 1. printPreviewDialog pe form        
         // 2. printDocument tot pe form
@@ -409,6 +395,47 @@ namespace exam
             operatie = Scadere;
             operatie(5, 3); // Output: Diferenta: 2
 
+        }
+
+        //DataGridView 
+        BindingList<Credit> credite = new BindingList<Credit>()
+         {
+         new Credit("Marcel Ionut", 20000, 3, DateTime.Parse("2003-03-12"), 10),
+         new Credit("Ion Popescu", 50000, 5, DateTime.Parse("2010-07-15"), 8),
+         new Credit("Maria Ionescu", 100000, 10, DateTime.Parse("2015-09-01"), 7),
+         new Credit("Ana Georgescu", 75000, 7, DateTime.Parse("2018-01-20"), 6)
+         };
+
+
+        public Form1()
+        {
+            InitializeComponent();
+            dgvCredite.DataSource = credite;
+            dgvCredite.AutoGenerateColumns = true;
+
+        }
+
+        // Clipboard 
+
+
+        // deschide meniuContextual si copiaza nume medic
+        private void copiazaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (lvMedici.SelectedItems.Count > 0)
+            {
+                Clipboard.SetText((lvMedici.SelectedItems[0].Tag as Medic).Nume);
+
+            }
+        }
+
+
+        // Este event Keypress atunci adauga continutul Clipboard
+        private void lbMedici_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Clipboard.ContainsText())
+            {
+                lbMedici.Items.Add(Clipboard.GetText());
+            }
         }
     }
 }
