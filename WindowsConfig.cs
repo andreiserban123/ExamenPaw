@@ -28,6 +28,41 @@ namespace exam
             }
             return nrTranzactii;
         }
+
+        //operator de indexare
+        public int this[int index]
+        {
+            get
+            {
+                if (index < 0 || index >= vectorOptiuni.Length)
+                {
+                    throw new IndexOutOfRangeException("Indexul este în afara limitelor.");
+                }
+                return vectorOptiuni[index];
+            }
+            set
+            {
+                if (index < 0 || index >= vectorOptiuni.Length)
+                {
+                    throw new IndexOutOfRangeException("Indexul este în afara limitelor.");
+                }
+                vectorOptiuni[index] = value;
+            }
+        }
+
+        //operator plus
+        public static Candidat operator +(Candidat c, int optiuneNoua)
+        {
+            int[] vectorNou = new int[c.vectorOptiuni.Length + 1];
+            for (int i = 0; i < c.vectorOptiuni.Length; i++)
+            {
+                vectorNou[i] = c.vectorOptiuni[i];
+            }
+            vectorNou[c.vectorOptiuni.Length] = optiuneNoua;
+            c.vectorOptiuni = vectorNou;
+            return c;
+        }
+
         // Scriere in txt
         private void salvareTXTToolStripMenuItem_Click(object sender, EventArgs e)
         {
