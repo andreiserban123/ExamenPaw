@@ -307,7 +307,7 @@ namespace exam
             List<Angajat> angajati = repo.getAngajati();
 
             var series = chartCompanii.Series.First();
-
+            series.ChartType = SeriesChartType.Bar;
             series.Name = "Nr angajati";
             foreach (var companie in companies)
             {

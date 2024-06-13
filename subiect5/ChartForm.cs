@@ -3,6 +3,7 @@ using subiect5.Repository;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace subiect5 {
     public partial class ChartForm : Form {
@@ -13,6 +14,8 @@ namespace subiect5 {
             List<Angajat> angajati = repo.getAngajati();
 
             var series = chartCompanii.Series.First();
+
+            series.ChartType = SeriesChartType.Bar;
 
             series.Name = "Nr angajati";
             foreach (var companie in companies) {
