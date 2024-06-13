@@ -318,5 +318,36 @@ namespace exam
             }
         }
 
+        //Pentru printat document
+        // 1. printPreviewDialog pe form        
+        // 2. printDocument tot pe form
+        // 3. La print previewDialog selectezi atribut document cel de la 2
+        // 4. Dupa apesi pe ceva buton sau trigger pentru a lansa  printPreviewDialog1.ShowDialog();
+        // 5. Pe printDocument1 ai eventul PrintPage acolo scrii codul de generare foaie
+        private void previewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            printPreviewDialog1.ShowDialog();
+        }
+
+        private void printDocument1_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            float yPos = e.MarginBounds.Top;
+            float leftMargin = e.MarginBounds.Left;
+            string line = null;
+
+            // Header
+            Font printFont = new Font("Arial", 12, FontStyle.Bold);
+            e.Graphics.DrawString("Raport Candidati", printFont, Brushes.Black, leftMargin, yPos);
+            yPos += printFont.GetHeight(e.Graphics);
+
+            // Content
+            printFont = new Font("Arial", 10);
+            foreach (Candidat c in candidati)
+            {
+                line = $"Nume:  {c.NumeCandidat}, Medie: {c.MedieConcurs}, Optiuni: {string.Join(",", c.VectorOptiuni)}";
+                yPos += printFont.GetHeight(e.Graphics);
+                e.Graphics.DrawString(line, printFont, Brushes.Black, leftMargin, yPos);
+            }
+
+        }
     }
-}
