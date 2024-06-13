@@ -115,6 +115,102 @@ namespace exam
                 }
             }
         }
+        // Salvare binar
+        private void salvareBinaraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog fd = new SaveFileDialog();
+            fd.Filter = "fisiere medic (*.med)|*.med";
+            fd.CheckPathExists = true;
 
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                fd.FileName = "g:\\test.med";
+                List<Medic> lista = new List<Medic>();
+                foreach (ListViewItem lvi in lvMedici.Items)
+                    lista.Add((Medic)lvi.Tag);
+
+                //linia 1
+                try
+                {
+                    BinaryFormatter serializator = new BinaryFormatter();
+                    Stream fisier = File.Create(fd.FileName);
+
+                    //linia 2
+                    serializator.Serialize(fisier, lista);
+                    fisier.Close();
+                    MessageBox.Show("Lista de medici a fost serializata!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Eroare",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+
+        }
+
+        // citire binar
+
+        private void restaurareBinarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.Filter = "fisiere medic (*.med)|*.med";
+            fd.CheckFileExists = true;
+
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                List<Medic> lista = new List<Medic>();
+
+                Stream fisier = File.OpenRead(fd.FileName);
+                BinaryFormatter serializator = new BinaryFormatter();
+                lista.AddRange((List<Medic>)serializator.Deserialize(fisier));
+
+                if (lvMedici.Items.Count > 0)
+                {
+                    if (MessageBox.Show("Sunt medici in lista. Doriti sa sterg lista existenta?",
+                        "Intrebare", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        lvMedici.Items.Clear();
+                }
+
+                foreach (Medic m in lista)
+                {
+                    ListViewItem lvi = new ListViewItem(new string[]
+                {m.Nume,m.Cnp,m.AnAbsolvire.ToString(),
+        m.Specializare,m.DataNastere.ToString()});
+                    lvi.Tag = m;
+                    lvMedici.Items.Add(lvi);
+                }
+                fisier.Close();
+            }
+        }
+
+        // citire din db
+        public List<Angajat> getAngajati()
+        {
+            List<Angajat> angajati = new List<Angajat>();
+            using (var connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=X:\\facultate\\paw\\subiect5\\db.mdf;Integrated Security=True;Connect Timeout=30"))
+            {
+                connection.Open();
+
+                using (var command = new SqlCommand("Select * from Angajati", connection))
+                {
+
+                    var reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+
+                        Angajat a = new Angajat();
+                        a.Name = reader.GetString(1);
+                        a.Data_nasterii = reader.GetDateTime(2);
+                        a.Id_companie = reader.GetInt32(3);
+
+                        angajati.Add(a);
+                    }
+                }
+
+            }
+            return angajati;
+        }
     }
 }
