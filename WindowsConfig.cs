@@ -386,5 +386,29 @@ namespace exam
             }
 
         }
+
+        //delegate
+        public delegate void OperatieMatematica(int x, int y);
+        public void Adunare(int x, int y)
+        {
+            Console.WriteLine("Suma: " + (x + y));
+        }
+
+        public void Scadere(int x, int y)
+        {
+            Console.WriteLine("Diferenta: " + (x - y));
+        }
+
+        public void Example()
+        {
+            OperatieMatematica operatie;
+
+            operatie = Adunare;
+            operatie(5, 3); // Output: Suma: 8
+
+            operatie = Scadere;
+            operatie(5, 3); // Output: Diferenta: 2
+
+        }
     }
 }

@@ -325,7 +325,6 @@ namespace exam {
                 yPos += printFont.GetHeight(e.Graphics);
                 e.Graphics.DrawString(line, printFont, Brushes.Black, leftMargin, yPos);
             }
-
         }
     }
 }
