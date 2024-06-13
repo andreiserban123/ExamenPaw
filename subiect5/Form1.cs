@@ -2,6 +2,7 @@
 using subiect5.Repository;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
@@ -44,6 +45,15 @@ namespace subiect5 {
             foreach (var angajat in angajati) {
                 var com = companies.Find(c => c.Id == angajat.Id_companie);
                 com.Angajati.Add(angajat);
+            }
+
+
+            foreach (var companie in companies) {
+
+                TreeNode treeNode = new TreeNode();
+                treeNode.Tag = companie;
+                treeNode.Text = companie.Name;
+                tvAngajati.Nodes.Add(treeNode);
             }
         }
 
@@ -227,6 +237,45 @@ namespace subiect5 {
                         }
                     }
                 }
+            }
+        }
+
+        private void lvAngajati_MouseDown(object sender, MouseEventArgs e) {
+            if (lvAngajati.SelectedItems.Count > 0) {
+                lvAngajati.DoDragDrop((Angajat)lvAngajati.SelectedItems[0].Tag, DragDropEffects.Copy);
+            }
+        }
+
+        private void tvAngajati_DragEnter(object sender, DragEventArgs e) {
+            if (e.Data.GetDataPresent(new Angajat().GetType().ToString()))
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void tvAngajati_DragDrop(object sender, DragEventArgs e) {
+            Point punctDinTreeview = tvAngajati.PointToClient(new Point(e.X, e.Y));
+            TreeNode tn = tvAngajati.GetNodeAt(punctDinTreeview);
+            if (tn != null && e.Effect == DragDropEffects.Copy && e.Data.GetDataPresent(typeof(Angajat))) {
+                Angajat a = (Angajat)e.Data.GetData(typeof(Angajat));
+                TreeNode t = new TreeNode(a.Name);
+                t.Tag = a;
+                tn.Nodes.Add(t);
+                tn.Expand();
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
+            // TODO: This line of code loads data into the 'dbDataSet.Angajati' table. You can move, or remove it, as needed.
+            this.angajatiTableAdapter.Fill(this.dbDataSet.Angajati);
+
+        }
+
+        private void Form1_MouseClick(object sender, MouseEventArgs e) {
+            if (e.Button == MouseButtons.Right) {
+
+                var chartForm = new ChartForm(companies);
+                chartForm.ShowDialog();
             }
         }
     }

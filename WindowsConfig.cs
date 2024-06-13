@@ -53,6 +53,48 @@ namespace exam
                 }
             }
         }
+        // Citire txt
+        private void btnIncarcaDinFisier_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Fișiere text|*.txt",
+                Title = "Selectează fișierul cu angajați"
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = openFileDialog.FileName;
+                angajati = CitesteAngajatiDinFisier(filePath);
+                ActualizeazaListView();
+            }
+        }
+
+        private List<Angajat> CitesteAngajatiDinFisier(string filePath)
+        {
+            List<Angajat> angajati = new List<Angajat>();
+
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] parts = line.Split(',');
+                    if (parts.Length == 3)
+                    {
+                        string nume = parts[0];
+                        DateTime dataNasterii = DateTime.Parse(parts[1]);
+                        int idCompanie = int.Parse(parts[2]);
+
+                        Angajat angajat = new Angajat(nume, dataNasterii, idCompanie);
+                        angajati.Add(angajat);
+                    }
+                }
+            }
+
+            return angajati;
+        }
+
         // xml salvare
         private void salvareaToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -223,5 +265,58 @@ namespace exam
             }
             return angajati;
         }
+
+
+        // Drag and drop
+
+        //1. Prima oara mouseDown
+        private void lvAngajati_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (lvAngajati.SelectedItems.Count > 0)
+            {
+                lvAngajati.DoDragDrop((Angajat)lvAngajati.SelectedItems[0].Tag, DragDropEffects.Copy);
+            }
+        }
+        //2. DragEnter
+        private void tvAngajati_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(new Angajat().GetType().ToString()))
+                e.Effect = DragDropEffects.Copy;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+        //3. DragDrop
+        private void tvAngajati_DragDrop(object sender, DragEventArgs e)
+        {
+            Point punctDinTreeview = tvAngajati.PointToClient(new Point(e.X, e.Y));
+            TreeNode tn = tvAngajati.GetNodeAt(punctDinTreeview);
+            if (tn != null && e.Effect == DragDropEffects.Copy && e.Data.GetDataPresent(typeof(Angajat)))
+            {
+                Angajat a = (Angajat)e.Data.GetData(typeof(Angajat));
+                TreeNode t = new TreeNode(a.Name);
+                t.Tag = a;
+                tn.Nodes.Add(t);
+                tn.Expand();
+            }
+        }
+
+        // Grafic in constructor faci tot, ai in designer de redenumit si atat
+        public ChartForm(List<Companie> companies)
+        {
+            InitializeComponent();
+            List<Angajat> angajati = repo.getAngajati();
+
+            var series = chartCompanii.Series.First();
+
+            series.Name = "Nr angajati";
+            foreach (var companie in companies)
+            {
+
+                int nr = angajati.FindAll(a => a.Id_companie == companie.Id).Count;
+
+                series.Points.AddXY(companie.Name, nr);
+            }
+        }
+
     }
 }

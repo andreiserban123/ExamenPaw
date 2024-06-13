@@ -12,12 +12,12 @@ namespace subiect5.Repository {
                 connection.Open();
 
 
-                using (var command = new SqlCommand("INSERT INTO ANGAJATI(Nume, data_nastere, id_companie) values(@n, @d, @i)", connection)) {
-                    command.Parameters.Add("n", "Bob Cat");
-                    command.Parameters.Add("d", DateTime.Parse("05.03.2000"));
-                    command.Parameters.Add("i", random.Next(1, 4));
-                    command.ExecuteNonQuery();
-                }
+                /*  using (var command = new SqlCommand("INSERT INTO ANGAJATI(Nume, data_nastere, id_companie) values(@n, @d, @i)", connection)) {
+                      command.Parameters.Add("n", "Bob Cat");
+                      command.Parameters.Add("d", DateTime.Parse("05.03.2000"));
+                      command.Parameters.Add("i", random.Next(1, 4));
+                      command.ExecuteNonQuery();
+                  }*/
 
 
                 using (var command = new SqlCommand("Select * from Angajati", connection)) {
