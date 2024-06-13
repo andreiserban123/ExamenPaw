@@ -3,16 +3,15 @@ using System.Linq;
 
 namespace ex3 {
     public class ExtrasCont {
-        private string numeClient;
-        private string adresa;
-        List<Tranzactie> tranzactii;
+        public string numeClient;
+        public string adresa;
+        public List<Tranzactie> tranzactii;
 
         public ExtrasCont(string numeClient, string adresa, List<Tranzactie> tranzactii) {
             this.NumeClient = numeClient;
             this.Adresa = adresa;
-            this.Tranzactii = tranzactii;
+            this.tranzactii = tranzactii;
         }
-
         public string NumeClient { get => numeClient; set => numeClient = value; }
         public string Adresa { get => adresa; set => adresa = value; }
         public List<Tranzactie> Tranzactii { get => tranzactii; set => tranzactii = value; }
@@ -26,6 +25,5 @@ namespace ex3 {
         public static implicit operator int(ExtrasCont extrasCont) {
             return extrasCont.tranzactii.Count;
         }
-
     }
 }

@@ -1,29 +1,34 @@
-﻿namespace ex3 {
-    public class Tranzactie : ITranzactie {
-        public const int idTranzactie = 0;
-        public string contIBAN;
-        public string detaliiTranzactie;
+﻿using System;
+
+namespace ex3 {
+    public class Tranzactie {
+        public readonly int idTranzactie;
+        public String contIban;
+        public String detaliiTranzactie;
         public double suma;
-        public string dataTranzactie;
+        public String dataTranzactie;
 
-        Tranzactie() {
-
+        public String ContIban {
+            get { return contIban; }
+            set { contIban = value; }
         }
+        public String ContDetalii { get; set; }
+        public String DetaliiTranzactie { get; set; }
+        public double Suma { get; set; }
+        public String DataTranzactiei { get; set; }
 
-        public Tranzactie(string contIBAN, string detaliiTranzactie, double suma, string dataTranzactie) {
-            this.contIBAN = contIBAN;
+        public Tranzactie() { }
+
+        public Tranzactie(int idTranzactie, String contIban, String detaliiTranzactie, double suma, String dataTranzactiei) {
+            this.idTranzactie = idTranzactie;
+            this.contIban = contIban;
             this.detaliiTranzactie = detaliiTranzactie;
             this.suma = suma;
             this.dataTranzactie = dataTranzactie;
         }
 
-        public void afisareTranzactie() {
-            System.Console.WriteLine(ToString());
-        }
-
-        public override string ToString() {
-            return idTranzactie + " " + contIBAN + " " + detaliiTranzactie
-                + " " + suma + " " + dataTranzactie;
+        public String ToString() {
+            return this.idTranzactie.ToString();
         }
     }
 }
