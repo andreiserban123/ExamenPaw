@@ -20,11 +20,11 @@ namespace ex3 {
             tranzactiiDisponibile.Add(t4);
             tranzactiiDisponibile.Add(t5);
 
-            cbTranzactii.Items.Add(t1.idTranzactie);
-            cbTranzactii.Items.Add(t2.idTranzactie);
-            cbTranzactii.Items.Add(t3.idTranzactie);
-            cbTranzactii.Items.Add(t4.idTranzactie);
-            cbTranzactii.Items.Add(t5.idTranzactie);
+            checkLBTranzactii.Items.Add(t1.idTranzactie);
+            checkLBTranzactii.Items.Add(t2.idTranzactie);
+            checkLBTranzactii.Items.Add(t3.idTranzactie);
+            checkLBTranzactii.Items.Add(t4.idTranzactie);
+            checkLBTranzactii.Items.Add(t5.idTranzactie);
 
             if (extrasCont == null) {
                 extrasCont = new ExtrasCont("N|A", "N|A", new List<Tranzactie>());
@@ -33,6 +33,15 @@ namespace ex3 {
             else {
                 tbNume.Text = extrasCont.numeClient;
                 tbAdresa.Text = extrasCont.adresa;
+
+                foreach (var tranz in extrasCont.tranzactii) {
+                    for (int i = 0; i < checkLBTranzactii.Items.Count; i++) {
+                        var item = (int)checkLBTranzactii.Items[i];
+                        if (item == tranz.idTranzactie) {
+                            checkLBTranzactii.SetItemChecked(i, true);
+                        }
+                    }
+                }
             }
             cExtrasCont = extrasCont;
         }
@@ -53,10 +62,12 @@ namespace ex3 {
             cExtrasCont.numeClient = tbNume.Text;
             cExtrasCont.adresa = tbAdresa.Text;
 
-            if (cbTranzactii.SelectedIndex != -1) {
-                int selectedId = (int)cbTranzactii.SelectedItem;
-                Tranzactie selected = tranzactiiDisponibile.Find(t => t.idTranzactie == selectedId);
-                cExtrasCont.tranzactii.Add(selected);
+            if (checkLBTranzactii.CheckedItems.Count > 0 && checkLBTranzactii.CheckedItems.Count <= 5) {
+                foreach (var itm in checkLBTranzactii.CheckedItems) {
+                    var selectedId = (int)itm;
+                    Tranzactie selected = tranzactiiDisponibile.Find(t => t.idTranzactie == selectedId);
+                    cExtrasCont.tranzactii.Add(selected);
+                }
             }
         }
 

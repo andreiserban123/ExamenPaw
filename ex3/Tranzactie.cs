@@ -1,25 +1,12 @@
-﻿using System;
-
-namespace ex3 {
+﻿namespace ex3 {
     public class Tranzactie {
         public readonly int idTranzactie;
-        public String contIban;
-        public String detaliiTranzactie;
+        public string contIban;
+        public string detaliiTranzactie;
         public double suma;
-        public String dataTranzactie;
+        public string dataTranzactie;
 
-        public String ContIban {
-            get { return contIban; }
-            set { contIban = value; }
-        }
-        public String ContDetalii { get; set; }
-        public String DetaliiTranzactie { get; set; }
-        public double Suma { get; set; }
-        public String DataTranzactiei { get; set; }
-
-        public Tranzactie() { }
-
-        public Tranzactie(int idTranzactie, String contIban, String detaliiTranzactie, double suma, String dataTranzactiei) {
+        public Tranzactie(int idTranzactie, string contIban, string detaliiTranzactie, double suma, string dataTranzactie) {
             this.idTranzactie = idTranzactie;
             this.contIban = contIban;
             this.detaliiTranzactie = detaliiTranzactie;
@@ -27,8 +14,8 @@ namespace ex3 {
             this.dataTranzactie = dataTranzactie;
         }
 
-        public String ToString() {
-            return this.idTranzactie.ToString();
+        public override string ToString() {
+            return $"{idTranzactie} - {contIban} - {detaliiTranzactie} - {suma} - {dataTranzactie}";
         }
     }
 }

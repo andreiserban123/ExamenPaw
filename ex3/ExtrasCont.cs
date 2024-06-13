@@ -10,7 +10,7 @@ namespace ex3 {
         public ExtrasCont(string numeClient, string adresa, List<Tranzactie> tranzactii) {
             this.NumeClient = numeClient;
             this.Adresa = adresa;
-            this.tranzactii = tranzactii;
+            this.Tranzactii = tranzactii;
         }
         public string NumeClient { get => numeClient; set => numeClient = value; }
         public string Adresa { get => adresa; set => adresa = value; }
