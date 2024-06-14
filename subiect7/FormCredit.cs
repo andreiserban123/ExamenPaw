@@ -41,8 +41,6 @@ namespace subiect7 {
                 }
 
 
-                var res = fCredit.CalculDesfasurator();
-                MessageBox.Show(string.Join(",", res));
 
 
                 if (fCredit.Perioada <= 0) {

@@ -32,6 +32,8 @@
             this.adaugaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lbCredite = new System.Windows.Forms.ListBox();
             this.copiazaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbRate = new System.Windows.Forms.TextBox();
+            this.btnCalcul = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCredite)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -107,15 +109,35 @@
             // copiazaToolStripMenuItem
             // 
             this.copiazaToolStripMenuItem.Name = "copiazaToolStripMenuItem";
-            this.copiazaToolStripMenuItem.Size = new System.Drawing.Size(240, 32);
+            this.copiazaToolStripMenuItem.Size = new System.Drawing.Size(153, 32);
             this.copiazaToolStripMenuItem.Text = "Copiaza";
             this.copiazaToolStripMenuItem.Click += new System.EventHandler(this.copiazaToolStripMenuItem_Click);
+            // 
+            // tbRate
+            // 
+            this.tbRate.Location = new System.Drawing.Point(156, 123);
+            this.tbRate.Name = "tbRate";
+            this.tbRate.ReadOnly = true;
+            this.tbRate.Size = new System.Drawing.Size(318, 26);
+            this.tbRate.TabIndex = 3;
+            // 
+            // btnCalcul
+            // 
+            this.btnCalcul.Location = new System.Drawing.Point(246, 170);
+            this.btnCalcul.Name = "btnCalcul";
+            this.btnCalcul.Size = new System.Drawing.Size(119, 51);
+            this.btnCalcul.TabIndex = 4;
+            this.btnCalcul.Text = "calculeaza credit lunar";
+            this.btnCalcul.UseVisualStyleBackColor = true;
+            this.btnCalcul.Click += new System.EventHandler(this.btnCalcul_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1248, 948);
+            this.Controls.Add(this.btnCalcul);
+            this.Controls.Add(this.tbRate);
             this.Controls.Add(this.lbCredite);
             this.Controls.Add(this.dgvCredite);
             this.Controls.Add(this.menuStrip1);
@@ -141,6 +163,8 @@
         private System.Windows.Forms.ToolStripMenuItem modificaToolStripMenuItem;
         private System.Windows.Forms.ListBox lbCredite;
         private System.Windows.Forms.ToolStripMenuItem copiazaToolStripMenuItem;
+        private System.Windows.Forms.TextBox tbRate;
+        private System.Windows.Forms.Button btnCalcul;
     }
 }
 

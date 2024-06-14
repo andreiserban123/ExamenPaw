@@ -89,5 +89,20 @@ namespace subiect7 {
                 Clipboard.Clear();
             }
         }
+
+        private void btnCalcul_Click(object sender, EventArgs e) {
+            if (dgvCredite.SelectedRows.Count > 0) {
+                var selectedRow = dgvCredite.SelectedRows[0];
+
+                var credit = selectedRow.DataBoundItem as Credit;
+
+                if (credit.AlgoritmDes != null) {
+                    tbRate.Text = (string.Join(",", credit.CalculDesfasurator()));
+                }
+                else {
+                    MessageBox.Show("Alege un algoritm de calcul!");
+                }
+            }
+        }
     }
 }
