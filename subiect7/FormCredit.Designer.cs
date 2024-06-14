@@ -34,8 +34,10 @@
             this.tbValoare = new System.Windows.Forms.TextBox();
             this.tbDobanda = new System.Windows.Forms.TextBox();
             this.tbData = new System.Windows.Forms.TextBox();
+            this.cbAlgoritm = new System.Windows.Forms.ComboBox();
             this.tbPerioada = new System.Windows.Forms.TextBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,7 +89,7 @@
             // btnFinish
             // 
             this.btnFinish.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnFinish.Location = new System.Drawing.Point(249, 351);
+            this.btnFinish.Location = new System.Drawing.Point(251, 431);
             this.btnFinish.Name = "btnFinish";
             this.btnFinish.Size = new System.Drawing.Size(173, 67);
             this.btnFinish.TabIndex = 5;
@@ -124,6 +126,18 @@
             this.tbData.Size = new System.Drawing.Size(341, 26);
             this.tbData.TabIndex = 9;
             // 
+            // cbAlgoritm
+            // 
+            this.cbAlgoritm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAlgoritm.FormattingEnabled = true;
+            this.cbAlgoritm.Items.AddRange(new object[] {
+            "Rate Descrescătoare",
+            "Rate Constante"});
+            this.cbAlgoritm.Location = new System.Drawing.Point(234, 320);
+            this.cbAlgoritm.Name = "cbAlgoritm";
+            this.cbAlgoritm.Size = new System.Drawing.Size(352, 28);
+            this.cbAlgoritm.TabIndex = 5;
+            // 
             // tbPerioada
             // 
             this.tbPerioada.Location = new System.Drawing.Point(234, 260);
@@ -135,11 +149,21 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(76, 327);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(67, 20);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Algoritm";
+            // 
             // FormCredit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(998, 823);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.tbPerioada);
             this.Controls.Add(this.tbData);
             this.Controls.Add(this.tbDobanda);
@@ -151,6 +175,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.cbAlgoritm);
             this.Name = "FormCredit";
             this.Text = "FormCredit";
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -173,5 +198,7 @@
         private System.Windows.Forms.TextBox tbData;
         private System.Windows.Forms.TextBox tbPerioada;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ComboBox cbAlgoritm;
+        private System.Windows.Forms.Label label6;
     }
 }

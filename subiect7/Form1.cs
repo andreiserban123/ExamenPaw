@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace subiect7 {
     public partial class Form1 : Form {
 
-        BindingList<Credit> credite = new BindingList<Credit>();
+        public BindingList<Credit> credite = new BindingList<Credit>();
 
         public Form1() {
             InitializeComponent();
@@ -74,5 +74,20 @@ namespace subiect7 {
             }
         }
 
+        private void copiazaToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (dgvCredite.SelectedRows.Count > 0) {
+                var selectedRow = dgvCredite.SelectedRows[0];
+
+                var credit = selectedRow.DataBoundItem as Credit;
+                Clipboard.SetText(credit.ToString());
+            }
+        }
+
+        private void lbCredite_KeyPress(object sender, KeyPressEventArgs e) {
+            if (Clipboard.ContainsText()) {
+                lbCredite.Items.Add(Clipboard.GetText());
+                Clipboard.Clear();
+            }
+        }
     }
 }

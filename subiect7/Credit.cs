@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 
 namespace subiect7 {
+    public delegate double[] AlgoritmDesfasurator(Credit credit);
     public class Credit {
         public string Client { get; set; }
         public double ValoareCredit { get; set; }
         public double Dobanda { get; set; }
         public DateTime DataAcordarii { get; set; }
         public int Perioada { get; set; }
-
+        public AlgoritmDesfasurator AlgoritmDes { get; set; }
         public Credit() {
         }
 
@@ -18,6 +19,15 @@ namespace subiect7 {
             Dobanda = dobanda;
             DataAcordarii = dataAcordarii;
             Perioada = perioada;
+        }
+
+        public double[] CalculDesfasurator() {
+            if (AlgoritmDes != null) {
+                return AlgoritmDes(this);
+            }
+            else {
+                throw new InvalidOperationException("Algoritm nespecificat pentru calcul desfasurator.");
+            }
         }
 
         public override string ToString() {

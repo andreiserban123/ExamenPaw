@@ -25,14 +25,16 @@
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.dgvCredite = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.modificaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.creditToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adaugaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.modificaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbCredite = new System.Windows.Forms.ListBox();
+            this.copiazaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCredite)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvCredite
@@ -48,6 +50,22 @@
             this.dgvCredite.RowTemplate.Height = 28;
             this.dgvCredite.Size = new System.Drawing.Size(1251, 541);
             this.dgvCredite.TabIndex = 0;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.modificaToolStripMenuItem,
+            this.copiazaToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(154, 68);
+            // 
+            // modificaToolStripMenuItem
+            // 
+            this.modificaToolStripMenuItem.Name = "modificaToolStripMenuItem";
+            this.modificaToolStripMenuItem.Size = new System.Drawing.Size(153, 32);
+            this.modificaToolStripMenuItem.Text = "Modifica";
+            this.modificaToolStripMenuItem.Click += new System.EventHandler(this.modificaToolStripMenuItem_Click);
             // 
             // menuStrip1
             // 
@@ -72,39 +90,42 @@
             // adaugaToolStripMenuItem
             // 
             this.adaugaToolStripMenuItem.Name = "adaugaToolStripMenuItem";
-            this.adaugaToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            this.adaugaToolStripMenuItem.Size = new System.Drawing.Size(176, 34);
             this.adaugaToolStripMenuItem.Text = "Adauga";
             this.adaugaToolStripMenuItem.Click += new System.EventHandler(this.adaugaToolStripMenuItem_Click);
             // 
-            // contextMenuStrip1
+            // lbCredite
             // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.modificaToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(154, 36);
+            this.lbCredite.FormattingEnabled = true;
+            this.lbCredite.ItemHeight = 20;
+            this.lbCredite.Location = new System.Drawing.Point(804, 50);
+            this.lbCredite.Name = "lbCredite";
+            this.lbCredite.Size = new System.Drawing.Size(363, 144);
+            this.lbCredite.TabIndex = 2;
+            this.lbCredite.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.lbCredite_KeyPress);
             // 
-            // modificaToolStripMenuItem
+            // copiazaToolStripMenuItem
             // 
-            this.modificaToolStripMenuItem.Name = "modificaToolStripMenuItem";
-            this.modificaToolStripMenuItem.Size = new System.Drawing.Size(240, 32);
-            this.modificaToolStripMenuItem.Text = "Modifica";
-            this.modificaToolStripMenuItem.Click += new System.EventHandler(this.modificaToolStripMenuItem_Click);
+            this.copiazaToolStripMenuItem.Name = "copiazaToolStripMenuItem";
+            this.copiazaToolStripMenuItem.Size = new System.Drawing.Size(240, 32);
+            this.copiazaToolStripMenuItem.Text = "Copiaza";
+            this.copiazaToolStripMenuItem.Click += new System.EventHandler(this.copiazaToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1248, 948);
+            this.Controls.Add(this.lbCredite);
             this.Controls.Add(this.dgvCredite);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dgvCredite)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -118,6 +139,8 @@
         private System.Windows.Forms.ToolStripMenuItem adaugaToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem modificaToolStripMenuItem;
+        private System.Windows.Forms.ListBox lbCredite;
+        private System.Windows.Forms.ToolStripMenuItem copiazaToolStripMenuItem;
     }
 }
 

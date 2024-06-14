@@ -288,8 +288,6 @@ namespace exam
             }
             return angajati;
         }
-
-
         // Drag and drop
 
         //1. Prima oara mouseDown
@@ -374,28 +372,72 @@ namespace exam
         }
 
         //delegate
-        public delegate void OperatieMatematica(int x, int y);
-        public void Adunare(int x, int y)
+        public delegate double[] AlgoritmDesfasurator(Credit credit);
+
+        public class Algoritmi
         {
-            Console.WriteLine("Suma: " + (x + y));
-        }
+            // Metoda 1: Plată fixă pe lună
+            public static double[] DesfasuratorRateDescrescatoare(Credit credit)
+            {
+                int n = credit.Perioada;
+                double[] platiLunare = new double[n];
+                double sumaRamas = credit.ValoareCredit;
+                double principalPlatit = credit.ValoareCredit / n;
 
-        public void Scadere(int x, int y)
+                for (int i = 0; i < n; i++)
+                {
+                    double dobandaLunara = sumaRamas * (credit.Dobanda / 100) / 12;
+                    platiLunare[i] = principalPlatit + dobandaLunara;
+                    sumaRamas -= principalPlatit;
+                }
+
+                return platiLunare;
+            }
+
+            // Metoda 2: Desfasurator Rate Constante
+            public static double[] DesfasuratorRateConstante(Credit credit)
+            {
+                int n = credit.Perioada;
+                double[] platiLunare = new double[n];
+                double dobandaTotala = credit.ValoareCredit * (credit.Dobanda / 100) * (credit.Perioada / 12);
+                double valoareTotala = credit.ValoareCredit + dobandaTotala;
+                double plataLunara = valoareTotala / n;
+
+                for (int i = 0; i < n; i++)
+                {
+                    platiLunare[i] = plataLunara;
+                }
+
+                return platiLunare;
+            }
+
+
+        }
+        public class Credit
         {
-            Console.WriteLine("Diferenta: " + (x - y));
+            public string Client { get; set; }
+            public double ValoareCredit { get; set; }
+            public double Dobanda { get; set; }
+            public DateTime DataAcordarii { get; set; }
+            public int Perioada { get; set; }
+            public AlgoritmDesfasurator AlgoritmDes { get; set; }
+            public double[] CalculDesfasurator()
+            {
+                if (AlgoritmDes != null)
+                {
+                    return AlgoritmDes(this);
+                }
+                else
+                {
+                    throw new InvalidOperationException("Algoritm nespecificat pentru calcul desfasurator.");
+                }
+            }
         }
+        //setez efectiv
+        fCredit.AlgoritmDes = Algoritmi.DesfasuratorRateDescrescatoare;
+        fCredit.AlgoritmDes = Algoritmi.DesfasuratorRateConstante;
 
-        public void Example()
-        {
-            OperatieMatematica operatie;
 
-            operatie = Adunare;
-            operatie(5, 3); // Output: Suma: 8
-
-            operatie = Scadere;
-            operatie(5, 3); // Output: Diferenta: 2
-
-        }
 
         //DataGridView 
         BindingList<Credit> credite = new BindingList<Credit>()
