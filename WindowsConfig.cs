@@ -480,4 +480,21 @@ namespace exam
             }
         }
     }
+    //MDI
+
+    // avem un form principal ca mai apoi sa avem un form secundar 
+    public Form1()
+    {
+        InitializeComponent();
+        IsMdiContainer = true; // Setăm fereastra principală ca MDI container
+    }
+
+
+    private void openChildFormToolStripMenuItem_Click_1(object sender, EventArgs e)
+    {
+        ChildForm childForm = new ChildForm();
+        childForm.MdiParent = this; // Setăm fereastra principală ca părinte
+        childForm.Show();
+    }
+
 }
